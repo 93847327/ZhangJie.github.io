@@ -2,25 +2,137 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>张杰的个人主页</title>
-    <!-- 清除页面默认边距，防止居中偏移 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人主页 | 动态效果</title>
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            min-height: 100vh;
+            background: #0f0f0f;
+            color: white;
+            overflow-x: hidden;
+        }
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(100, 43, 115, 0.3) 0%, transparent 70%);
+            z-index: -1;
+        }
+        .avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid #642b73;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 30px rgba(100, 43, 115, 0.5);
+            transition: transform 0.5s ease;
+        }
+        .avatar:hover {
+            transform: scale(1.05);
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 15px rgba(100, 43, 115, 0.7);
+        }
+        .title {
+            font-size: 1.2rem;
+            color: #a78bfa;
+            margin-bottom: 1.5rem;
+        }
+        .bio {
+            max-width: 600px;
+            text-align: center;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        .social {
+            display: flex;
+            gap: 1.5rem;
+        }
+        .social a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .social a:hover {
+            color: #a78bfa;
+            transform: translateY(-3px);
+        }
+        .mouse-follower {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(167, 139, 250, 0.1);
+            border: 1px solid rgba(167, 139, 250, 0.3);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease;
+            z-index: -2;
+        }
+        .mouse-follower.hover {
+            width: 60px;
+            height: 60px;
+            background: rgba(167, 139, 250, 0.2);
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-<!-- 父容器占满全屏，实现全屏上下+水平居中 -->
-<body style="display: flex; justify-content: center; align-items: center; height: 100vh;">
-    <!-- 核心文字XX，所有样式均标注可修改项 -->
-    <span style="
-        font-weight: bold; /* 加粗：bold=加粗，normal=取消加粗 */
-        font-family: '微软雅黑', 'PingFang SC', sans-serif; /* 可修改字体，顺序为优先降级 */
-        font-size: 88px; /* 可修改字号，数值越大文字越大 */
-        color: #333; /* 可选：修改文字颜色 */
-    ">
-        张杰
-    </span>
+<body>
+    <div class="mouse-follower"></div>
+    <div class="hero">
+        < img src="https://via.placeholder.com/180" alt="头像" class="avatar">
+        <h1>张杰</h1>
+        <div class="title">大厂转了一圈的HR</div>
+        <p class="bio">坚持做有意义的事</p >
+        <div class="social">
+            <a href=" "><i class="fab fa-behance"></i> Behance</a >
+            <a href="#"><i class="fab fa-dribbble"></i> Dribbble</a >
+            <a href="#"><i class="fab fa-github"></i> GitHub</a >
+            <a href="#"><i class="fas fa-envelope"></i> 联系我</a >
+        </div>
+    </div>
+    <script>
+        // 鼠标跟随效果
+        const follower = document.querySelector('.mouse-follower');
+        document.addEventListener('mousemove', (e) => {
+            follower.style.left = `${e.clientX}px`;
+            follower.style.top = `${e.clientY}px`;
+        });
+        
+        // 悬停放大效果
+        const links = document.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                follower.classList.add('hover');
+            });
+            link.addEventListener('mouseleave', () => {
+                follower.classList.remove('hover');
+            });
+        });
+    </script>
 </body>
 </html>
