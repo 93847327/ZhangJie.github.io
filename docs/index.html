@@ -101,9 +101,55 @@
         <div class="title">大厂转了一圈的HR</div>
         <p class="bio">擅长增肌减脂，没事的时候也当当HR</p >
         <div class="social">
-            <a href="https://www.linkedin.com/"><i class="fab fa-linkedin"></i></a >
-            <a href="https://maimai.cn/contact/share/card?u=rznibwzdoy0c&_share_channel=copy_link" class="social-link"><img src="maimai.png" alt="脉脉" class="custom-icon">
-            <a href="mailto:93847327@qq.com" class="footer-link"><i class="fas fa-envelope"></i></a >
+           <div class="social">
+    <!-- LinkedIn 原有图标 -->
+    <a href="https://www.linkedin.com/" class="social-link">
+        <i class="fab fa-linkedin"></i>
+    </a>
+    <!-- 脉脉自定义图片图标 -->
+    <a href="https://maimai.cn/contact/share/card?u=rznibwzdoy0c&_share_channel=copy_link" class="social-link">
+        <img src="maimai.png" alt="脉脉" class="custom-icon">
+    </a>
+    <!-- 邮箱原有图标 -->
+    <a href="mailto:93847327@qq.com" class="social-link">
+        <i class="fas fa-envelope"></i>
+    </a>
+</div>
+
+<!-- 配套CSS（统一图标样式，和LinkedIn/邮箱保持一致） -->
+<style>
+    /* 统一社交链接容器样式 */
+    .social-link {
+        display: inline-block;
+        width: 40px;  /* 和其他图标统一大小 */
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        background-color: #ffffff; /* 白底 */
+        border-radius: 50%; /* 圆形 */
+        margin: 0 5px;
+        color: #333;
+        text-decoration: none;
+        font-size: 18px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    /* 自定义脉脉图片图标样式 */
+    .custom-icon {
+        width: 20px;  /* 图片大小适配容器 */
+        height: 20px;
+        vertical-align: middle; /* 垂直居中 */
+        object-fit: contain; /* 保持图片比例，不拉伸 */
+    }
+    /* 悬浮效果统一 */
+    .social-link:hover {
+        color: #0077b5;
+        background-color: #f8f9fa;
+    }
+    /* 修正图片图标悬浮时的背景色（可选） */
+    .social-link:hover .custom-icon {
+        opacity: 0.8; /* 悬浮时轻微透明，和其他图标效果一致 */
+    }
+</style>
         </div>
     </div>
 </body>
