@@ -2,8 +2,9 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <!-- 关键：添加视口设置，让手机端按屏幕宽度渲染 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>张杰的个人主页</title>
-    <!-- 合并所有CSS样式，删除冗余定义 -->
     <style>
         /* 基础重置 + 全局样式 */
         * {
@@ -27,7 +28,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 2rem;
+            /* 移动端减少内边距，避免内容挤到边缘 */
+            padding: 1rem;
         }
 
         @keyframes gradient {
@@ -36,15 +38,16 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* 卡片样式 */
+        /* 卡片样式：适配移动端 */
         .card {
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 2.5rem;
-            max-width: 600px;
+            /* 移动端减少内边距，增大最大宽度适配屏幕 */
+            padding: 2rem 1.5rem;
+            max-width: 90%; /* 占屏幕90%宽度，避免太窄 */
             width: 100%;
             color: white;
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
@@ -53,10 +56,10 @@
 
         .card:hover { transform: translateY(-5px); }
 
-        /* 头像与文本样式 */
+        /* 头像：移动端缩小一点，适配屏幕 */
         .avatar {
-            width: 120px;
-            height: 120px;
+            width: 100px; /* PC端120px → 移动端100px */
+            height: 100px;
             border-radius: 50%;
             border: 3px solid white;
             margin: 0 auto 1.5rem;
@@ -67,16 +70,18 @@
             pointer-events: none;
         }
 
+        /* 文本样式：移动端适配字体大小 */
         h1 {
             text-align: center;
-            font-size: 2rem;
+            /* 使用相对单位rem，适配不同屏幕 */
+            font-size: 1.8rem; /* PC端2rem → 移动端1.8rem */
             margin-bottom: 0.5rem;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .title {
             text-align: center;
-            font-size: 1.1rem;
+            font-size: 1rem; /* PC端1.1rem → 移动端1rem */
             opacity: 0.8;
             margin-bottom: 1.5rem;
         }
@@ -85,13 +90,17 @@
             text-align: center;
             margin-bottom: 2rem;
             line-height: 1.6;
+            /* 移动端增大字体，避免太小 */
+            font-size: 1rem;
         }
 
-        /* 社交链接样式（统一整合） */
+        /* 社交链接：移动端调整间距，避免挤在一起 */
         .social {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
+            /* PC端1.5rem → 移动端1rem，减少间距 */
+            gap: 1rem;
+            flex-wrap: wrap; /* 防止小屏溢出 */
         }
 
         .social-link {
@@ -125,8 +134,15 @@
 
         /* 禁止打印 */
         @media print { html, body { display: none !important; } }
+
+        /* 针对小屏手机的额外适配（可选） */
+        @media (max-width: 375px) {
+            .avatar { width: 80px; height: 80px; }
+            h1 { font-size: 1.6rem; }
+            .social-link { width: 36px; height: 36px; }
+            .custom-icon { width: 26px; height: 26px; }
+        }
     </style>
-    <!-- 外部资源引入 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
@@ -149,7 +165,6 @@
         </div>
     </div>
 
-    <!-- 简化后的JS防护逻辑 -->
     <script>
         // 合并事件绑定：右键/复制/剪切/粘贴
         ['contextmenu', 'copy', 'cut', 'paste'].forEach(event => {
