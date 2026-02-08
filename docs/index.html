@@ -1,8 +1,30 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  /* 强禁止选中 */
+  body * {
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    pointer-events: auto; /* 保证按钮/链接可点 */
+  }
+  /* 禁止图片拖拽 */
+  img {
+    -webkit-user-drag: none !important;
+    user-drag: none !important;
+    pointer-events: none; /* 可选：图片不可点/不可拖 */
+  }
+  /* 禁止打印、另存为打印 */
+  @media print {
+    html, body {
+      display: none !important;
+    }
+  }
+</style>
+</head>
+<body>
     <title>张杰的个人主页</title>
     <style>
         * {
@@ -152,5 +174,73 @@
 </style>
         </div>
     </div>
+    <script>
+// ==============================================
+// 1. 禁止右键
+// ==============================================
+document.oncontextmenu = function (e) {
+  return false;
+};
+
+// ==============================================
+// 2. 更强屏蔽调试快捷键
+// ==============================================
+document.onkeydown = function (e) {
+  // F12
+  if (e.key === 'F12') return false;
+  // Ctrl+U 查看源码
+  if (e.ctrlKey && e.key === 'u') return false;
+  // Ctrl+S 保存
+  if (e.ctrlKey && e.key === 's') return false;
+  // Ctrl+P 打印
+  if (e.ctrlKey && e.key === 'p') return false;
+  // Ctrl+Shift+I / J / C 开发者工具
+  if (e.ctrlKey && e.shiftKey && (e.key === 'i' || e.key === 'j' || e.key === 'c')) {
+    return false;
+  }
+  // Ctrl+Shift+K (火狐控制台)
+  if (e.ctrlKey && e.shiftKey && e.key === 'k') return false;
+};
+
+// ==============================================
+// 3. 防控制台打开：无限 debugger（最有效）
+// ==============================================
+function antiDevTool() {
+  var d = new Date();
+  debugger;
+  if (new Date() - d > 100) {
+    // 打开控制台会明显卡顿，直接跳空白/清空页面
+    document.body.innerHTML = '请关闭开发者工具';
+    window.location = 'about:blank';
+  }
+}
+// 循环检测
+setInterval(antiDevTool, 100);
+
+// ==============================================
+// 4. 防 iframe 嵌套（防止被嵌套抓内容）
+// ==============================================
+if (window.top !== window.self) {
+  window.top.location = window.location;
+}
+
+// ==============================================
+// 5. 禁止复制（补充兜底）
+// ==============================================
+document.oncopy = function (e) {
+  e.preventDefault();
+  return false;
+};
+document.oncut = function (e) {
+  e.preventDefault();
+  return false;
+};
+document.onpaste = function (e) {
+  e.preventDefault();
+  return false;
+};
+</script>
+
+</body>
 </body>
 </html>
