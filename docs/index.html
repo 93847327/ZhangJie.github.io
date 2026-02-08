@@ -1,38 +1,24 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<style>
-  /* 强禁止选中 */
-  body * {
-    user-select: none !important;
-    -webkit-user-select: none !important;
-    -moz-user-select: none !important;
-    -ms-user-select: none !important;
-    pointer-events: auto; /* 保证按钮/链接可点 */
-  }
-  /* 禁止图片拖拽 */
-  img {
-    -webkit-user-drag: none !important;
-    user-drag: none !important;
-    pointer-events: none; /* 可选：图片不可点/不可拖 */
-  }
-  /* 禁止打印、另存为打印 */
-  @media print {
-    html, body {
-      display: none !important;
-    }
-  }
-</style>
-</head>
-<body>
+    <meta charset="UTF-8">
     <title>张杰的个人主页</title>
+    <!-- 合并所有CSS样式，删除冗余定义 -->
     <style>
+        /* 基础重置 + 全局样式 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Space Grotesk', sans-serif;
+            user-select: none !important;
+            -webkit-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
+            pointer-events: auto;
         }
+
+        /* 页面背景与布局 */
         body {
             min-height: 100vh;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -43,11 +29,14 @@
             align-items: center;
             padding: 2rem;
         }
+
         @keyframes gradient {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+
+        /* 卡片样式 */
         .card {
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(10px);
@@ -61,9 +50,10 @@
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
             transition: transform 0.3s ease;
         }
-        .card:hover {
-            transform: translateY(-5px);
-        }
+
+        .card:hover { transform: translateY(-5px); }
+
+        /* 头像与文本样式 */
         .avatar {
             width: 120px;
             height: 120px;
@@ -72,175 +62,125 @@
             margin: 0 auto 1.5rem;
             display: block;
             object-fit: cover;
+            -webkit-user-drag: none !important;
+            user-drag: none !important;
+            pointer-events: none;
         }
+
         h1 {
             text-align: center;
             font-size: 2rem;
             margin-bottom: 0.5rem;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
         .title {
             text-align: center;
             font-size: 1.1rem;
             opacity: 0.8;
             margin-bottom: 1.5rem;
         }
+
         .bio {
             text-align: center;
             margin-bottom: 2rem;
             line-height: 1.6;
         }
+
+        /* 社交链接样式（统一整合） */
         .social {
             display: flex;
             justify-content: center;
             gap: 1.5rem;
         }
-        .social a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.5rem;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            display: flex;
+
+        .social-link {
+            display: inline-flex;
             justify-content: center;
             align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #ffffff;
+            margin: 0 5px;
+            color: #333;
+            text-decoration: none;
+            font-size: 18px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
         }
-        .social a:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.1);
+
+        .social-link:hover {
+            color: #0077b5;
+            background-color: #f8f9fa;
         }
+
+        .custom-icon {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+        }
+
+        .social-link:hover .custom-icon { opacity: 0.8; }
+
+        /* 禁止打印 */
+        @media print { html, body { display: none !important; } }
     </style>
+    <!-- 外部资源引入 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="card">
-         <img src="myavatar.jpg" alt="头像" class="avatar" />
+        <img src="myavatar.jpg" alt="头像" class="avatar" />
         <h1>张杰</h1>
         <div class="title">大厂转了一圈的HR</div>
-        <p class="bio">擅长增肌减脂，没事的时候也当当HR</p >
+        <p class="bio">擅长增肌减脂，没事的时候也当当HR</p>
         <div class="social">
-           <div class="social">
-    <!-- LinkedIn 原有图标 -->
-    <a href="https://www.linkedin.com/" class="social-link">
-        <i class="fab fa-linkedin"></i>
-    </a>
-    <!-- 脉脉自定义图片图标 -->
-    <a href="https://maimai.cn/contact/share/card?u=rznibwzdoy0c&_share_channel=copy_link" class="social-link">
-        <img src="maimai.png" alt="脉脉" class="custom-icon">
-    </a>
-    <!-- 邮箱原有图标 -->
-    <a href="mailto:93847327@qq.com" class="social-link">
-        <i class="fas fa-envelope"></i>
-    </a>
-</div>
-
-<!-- 配套CSS（统一图标样式，和LinkedIn/邮箱保持一致） -->
-<style>
-    /* 统一社交链接容器样式 */
-    .social-link {
-        display: inline-block;
-        width: 40px;  /* 和其他图标统一大小 */
-        height: 40px;
-        line-height: 40px;
-        text-align: center;
-        background-color: #ffffff; /* 白底 */
-        border-radius: 50%; /* 圆形 */
-        margin: 0 5px;
-        color: #333;
-        text-decoration: none;
-        font-size: 18px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    /* 自定义脉脉图片图标样式 */
-    .custom-icon {
-        width: 30px;  /* 图片大小适配容器 */
-        height: 30px;
-        vertical-align: middle; /* 垂直居中 */
-        object-fit: contain; /* 保持图片比例，不拉伸 */
-    }
-    /* 悬浮效果统一 */
-    .social-link:hover {
-        color: #0077b5;
-        background-color: #f8f9fa;
-    }
-    /* 修正图片图标悬浮时的背景色（可选） */
-    .social-link:hover .custom-icon {
-        opacity: 0.8; /* 悬浮时轻微透明，和其他图标效果一致 */
-    }
-</style>
+            <a href="https://www.linkedin.com/" class="social-link">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://maimai.cn/contact/share/card?u=rznibwzdoy0c&_share_channel=copy_link" class="social-link">
+                <img src="maimai.png" alt="脉脉" class="custom-icon">
+            </a>
+            <a href="mailto:93847327@qq.com" class="social-link">
+                <i class="fas fa-envelope"></i>
+            </a>
         </div>
     </div>
+
+    <!-- 简化后的JS防护逻辑 -->
     <script>
-// ==============================================
-// 1. 禁止右键
-// ==============================================
-document.oncontextmenu = function (e) {
-  return false;
-};
+        // 合并事件绑定：右键/复制/剪切/粘贴
+        ['contextmenu', 'copy', 'cut', 'paste'].forEach(event => {
+            document.addEventListener(event, e => e.preventDefault());
+        });
 
-// ==============================================
-// 2. 更强屏蔽调试快捷键
-// ==============================================
-document.onkeydown = function (e) {
-  // F12
-  if (e.key === 'F12') return false;
-  // Ctrl+U 查看源码
-  if (e.ctrlKey && e.key === 'u') return false;
-  // Ctrl+S 保存
-  if (e.ctrlKey && e.key === 's') return false;
-  // Ctrl+P 打印
-  if (e.ctrlKey && e.key === 'p') return false;
-  // Ctrl+Shift+I / J / C 开发者工具
-  if (e.ctrlKey && e.shiftKey && (e.key === 'i' || e.key === 'j' || e.key === 'c')) {
-    return false;
-  }
-  // Ctrl+Shift+K (火狐控制台)
-  if (e.ctrlKey && e.shiftKey && e.key === 'k') return false;
-};
+        // 屏蔽调试/保存快捷键
+        document.addEventListener('keydown', e => {
+            const forbidden = ['F12', 'u', 's', 'p', 'i', 'j', 'c', 'k'];
+            if (forbidden.includes(e.key) && (
+                e.key === 'F12' ||
+                e.ctrlKey && !e.shiftKey ||
+                e.ctrlKey && e.shiftKey && ['i','j','c','k'].includes(e.key)
+            )) {
+                e.preventDefault();
+                return false;
+            }
+        });
 
-// ==============================================
-// 3. 防控制台打开：无限 debugger（最有效）
-// ==============================================
-function antiDevTool() {
-  var d = new Date();
-  debugger;
-  if (new Date() - d > 100) {
-    // 打开控制台会明显卡顿，直接跳空白/清空页面
-    document.body.innerHTML = '请关闭开发者工具';
-    window.location = 'about:blank';
-  }
-}
-// 循环检测
-setInterval(antiDevTool, 100);
+        // 防控制台调试
+        setInterval(() => {
+            const d = new Date();
+            debugger;
+            if (new Date() - d > 100) {
+                document.body.innerHTML = '请关闭开发者工具';
+                window.location = 'about:blank';
+            }
+        }, 100);
 
-// ==============================================
-// 4. 防 iframe 嵌套（防止被嵌套抓内容）
-// ==============================================
-if (window.top !== window.self) {
-  window.top.location = window.location;
-}
-
-// ==============================================
-// 5. 禁止复制（补充兜底）
-// ==============================================
-document.oncopy = function (e) {
-  e.preventDefault();
-  return false;
-};
-document.oncut = function (e) {
-  e.preventDefault();
-  return false;
-};
-document.onpaste = function (e) {
-  e.preventDefault();
-  return false;
-};
-</script>
-
-</body>
+        // 防iframe嵌套
+        if (window.top !== window.self) window.top.location = window.location;
+    </script>
 </body>
 </html>
