@@ -42,88 +42,180 @@
             100% { background-position: 0 0, 40px 40px, 40px 40px; }
         }
 
-        /* 赛博朋克霓虹点（基础样式：初始位置脱离可视区，实现满屏移动） */
+        /* 赛博朋克霓虹点（基础样式） */
         .cyber-dot {
             position: absolute;
             border-radius: 50%;
             pointer-events: none;
             z-index: 1;
             box-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
-            /* 初始位置在屏幕外，动画时移动到另一侧屏幕外，实现满屏穿越 */
         }
 
-        /* 5个霓虹点：满屏无规则移动（跨屏幕轨迹） */
+        /* ========== PC端10个非线性无规则霓虹点 ========== */
+        /* 点1：粉紫 */
         .cyber-dot:nth-child(1) {
             width: 20px; height: 20px;
             color: #ff00c8;
-            top: -10%; left: -10%; /* 初始在左上角外 */
-            animation: float1 12s ease-in-out infinite; /* 无alternate，循环不回弹 */
+            top: -10%; left: -10%;
+            animation: float1-pc 18s ease-in-out infinite;
         }
+        /* 点2：青蓝 */
         .cyber-dot:nth-child(2) {
             width: 15px; height: 15px;
             color: #00c8ff;
-            top: 110%; left: -10%; /* 初始在左下角外 */
-            animation: float2 10s ease-in-out infinite;
+            top: 110%; left: -10%;
+            animation: float2-pc 15s ease-in-out infinite;
         }
+        /* 点3：荧光绿 */
         .cyber-dot:nth-child(3) {
             width: 25px; height: 25px;
             color: #00ff9c;
-            top: -10%; left: 110%; /* 初始在右上角外 */
-            animation: float3 14s ease-in-out infinite;
+            top: -10%; left: 110%;
+            animation: float3-pc 17s ease-in-out infinite;
         }
+        /* 点4：粉紫 */
         .cyber-dot:nth-child(4) {
             width: 18px; height: 18px;
             color: #ff00c8;
-            top: 110%; left: 110%; /* 初始在右下角外 */
-            animation: float4 11s ease-in-out infinite;
+            top: 110%; left: 110%;
+            animation: float4-pc 14s ease-in-out infinite;
         }
+        /* 点5：青蓝 */
         .cyber-dot:nth-child(5) {
             width: 22px; height: 22px;
             color: #00c8ff;
-            top: 50%; left: -10%; /* 初始在左侧中间外 */
-            animation: float5 13s ease-in-out infinite;
+            top: 50%; left: -10%;
+            animation: float5-pc 16s ease-in-out infinite;
+        }
+        /* 点6：荧光绿 */
+        .cyber-dot:nth-child(6) {
+            width: 19px; height: 19px;
+            color: #00ff9c;
+            top: 50%; left: 110%;
+            animation: float6-pc 19s ease-in-out infinite;
+        }
+        /* 点7：粉紫 */
+        .cyber-dot:nth-child(7) {
+            width: 21px; height: 21px;
+            color: #ff00c8;
+            top: -10%; left: 50%;
+            animation: float7-pc 13s ease-in-out infinite;
+        }
+        /* 点8：青蓝 */
+        .cyber-dot:nth-child(8) {
+            width: 17px; height: 17px;
+            color: #00c8ff;
+            top: 110%; left: 50%;
+            animation: float8-pc 20s ease-in-out infinite;
+        }
+        /* 点9：荧光绿 */
+        .cyber-dot:nth-child(9) {
+            width: 23px; height: 23px;
+            color: #00ff9c;
+            top: 20%; left: 80%;
+            animation: float9-pc 12s ease-in-out infinite;
+        }
+        /* 点10：粉紫 */
+        .cyber-dot:nth-child(10) {
+            width: 16px; height: 16px;
+            color: #ff00c8;
+            top: 80%; left: 20%;
+            animation: float10-pc 18s ease-in-out infinite;
         }
 
-        /* 满屏无规则动画：从屏幕一侧外移动到另一侧外，轨迹覆盖全屏 */
-        @keyframes float1 {
+        /* ========== PC端非线性无规则动画（核心：无规律关键帧+曲线轨迹） ========== */
+        @keyframes float1-pc {
             0% { transform: translate(0, 0) scale(1); }
-            20% { transform: translate(calc(100vw * 0.4), calc(100vh * 0.6)) scale(1.2); }
-            40% { transform: translate(calc(100vw * 0.8), calc(100vh * 0.3)) scale(0.9); }
-            60% { transform: translate(calc(100vw * 0.5), calc(100vh * 0.8)) scale(1.3); }
-            80% { transform: translate(calc(100vw * 0.2), calc(100vh * 0.4)) scale(1); }
-            100% { transform: translate(calc(100vw * 1.2), calc(100vh * 1.2)) scale(1.1); } /* 最终到右下角外 */
+            15% { transform: translate(calc(100vw * 0.3), calc(100vh * 0.5)) scale(1.2); }
+            35% { transform: translate(calc(100vw * 0.7), calc(100vh * 0.2)) scale(0.9); }
+            55% { transform: translate(calc(100vw * 0.4), calc(100vh * 0.8)) scale(1.3); }
+            75% { transform: translate(calc(100vw * 0.1), calc(100vh * 0.4)) scale(1); }
+            90% { transform: translate(calc(100vw * 0.8), calc(100vh * 0.6)) scale(1.1); }
+            100% { transform: translate(calc(100vw * 1.2), calc(100vh * 1.2)) scale(1); }
         }
-        @keyframes float2 {
+        @keyframes float2-pc {
             0% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(calc(100vw * 0.7), calc(100vh * -0.2)) scale(1.1); }
-            50% { transform: translate(calc(100vw * 0.3), calc(100vh * 0.7)) scale(0.8); }
-            75% { transform: translate(calc(100vw * 0.9), calc(100vh * 0.5)) scale(1.2); }
-            100% { transform: translate(calc(100vw * 1.2), calc(100vh * -0.2)) scale(1); } /* 最终到右上角外 */
+            20% { transform: translate(calc(100vw * 0.6), calc(100vh * -0.1)) scale(1.1); }
+            40% { transform: translate(calc(100vw * 0.2), calc(100vh * 0.7)) scale(0.8); }
+            60% { transform: translate(calc(100vw * 0.8), calc(100vh * 0.4)) scale(1.2); }
+            80% { transform: translate(calc(100vw * 0.4), calc(100vh * 0.1)) scale(0.9); }
+            95% { transform: translate(calc(100vw * 0.9), calc(100vh * 0.8)) scale(1.1); }
+            100% { transform: translate(calc(100vw * 1.2), calc(100vh * -0.2)) scale(1); }
         }
-        @keyframes float3 {
+        @keyframes float3-pc {
             0% { transform: translate(0, 0) scale(1); }
-            20% { transform: translate(calc(100vw * -0.2), calc(100vh * 0.5)) scale(1.2); }
-            40% { transform: translate(calc(100vw * 0.6), calc(100vh * 0.9)) scale(0.9); }
-            60% { transform: translate(calc(100vw * 0.3), calc(100vh * 0.2)) scale(1.3); }
-            80% { transform: translate(calc(100vw * 0.8), calc(100vh * 0.7)) scale(1); }
-            100% { transform: translate(calc(100vw * -0.2), calc(100vh * 1.2)) scale(1.1); } /* 最终到左下角外 */
+            10% { transform: translate(calc(100vw * -0.1), calc(100vh * 0.4)) scale(1.2); }
+            30% { transform: translate(calc(100vw * 0.5), calc(100vh * 0.9)) scale(0.9); }
+            50% { transform: translate(calc(100vw * 0.2), calc(100vh * 0.1)) scale(1.3); }
+            70% { transform: translate(calc(100vw * 0.7), calc(100vh * 0.6)) scale(1); }
+            85% { transform: translate(calc(100vw * 0.3), calc(100vh * 0.3)) scale(1.1); }
+            100% { transform: translate(calc(100vw * -0.2), calc(100vh * 1.2)) scale(1); }
         }
-        @keyframes float4 {
+        @keyframes float4-pc {
             0% { transform: translate(0, 0) scale(1); }
-            30% { transform: translate(calc(100vw * -0.1), calc(100vh * 0.4)) scale(1.1); }
-            50% { transform: translate(calc(100vw * 0.5), calc(100vh * -0.1)) scale(0.8); }
-            70% { transform: translate(calc(100vw * 0.2), calc(100vh * 0.8)) scale(1.2); }
-            100% { transform: translate(calc(100vw * -0.1), calc(100vh * -0.1)) scale(1); } /* 最终到左上角外 */
+            25% { transform: translate(calc(100vw * -0.05), calc(100vh * 0.3)) scale(1.1); }
+            45% { transform: translate(calc(100vw * 0.4), calc(100vh * -0.05)) scale(0.8); }
+            65% { transform: translate(calc(100vw * 0.1), calc(100vh * 0.7)) scale(1.2); }
+            85% { transform: translate(calc(100vw * 0.6), calc(100vh * 0.2)) scale(0.9); }
+            98% { transform: translate(calc(100vw * 0.2), calc(100vh * 0.5)) scale(1.1); }
+            100% { transform: translate(calc(100vw * -0.1), calc(100vh * -0.1)) scale(1); }
         }
-        @keyframes float5 {
+        @keyframes float5-pc {
             0% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(calc(100vw * 0.6), calc(100vh * 0.2)) scale(1.2); }
-            50% { transform: translate(calc(100vw * 0.9), calc(100vh * 0.8)) scale(0.9); }
-            75% { transform: translate(calc(100vw * 0.4), calc(100vh * 0.5)) scale(1.3); }
-            100% { transform: translate(calc(100vw * 1.2), calc(100vh * 0.3)) scale(1.1); } /* 最终到右侧中间外 */
+            18% { transform: translate(calc(100vw * 0.5), calc(100vh * 0.1)) scale(1.2); }
+            38% { transform: translate(calc(100vw * 0.8), calc(100vh * 0.7)) scale(0.9); }
+            58% { transform: translate(calc(100vw * 0.3), calc(100vh * 0.4)) scale(1.3); }
+            78% { transform: translate(calc(100vw * 0.9), calc(100vh * 0.2)) scale(1); }
+            92% { transform: translate(calc(100vw * 0.6), calc(100vh * 0.8)) scale(1.1); }
+            100% { transform: translate(calc(100vw * 1.2), calc(100vh * 0.3)) scale(1); }
+        }
+        @keyframes float6-pc {
+            0% { transform: translate(0, 0) scale(1); }
+            12% { transform: translate(calc(100vw * -0.15), calc(100vh * 0.6)) scale(1.2); }
+            32% { transform: translate(calc(100vw * 0.4), calc(100vh * 0.2)) scale(0.9); }
+            52% { transform: translate(calc(100vw * 0.8), calc(100vh * 0.8)) scale(1.3); }
+            72% { transform: translate(calc(100vw * 0.2), calc(100vh * 0.5)) scale(1); }
+            88% { transform: translate(calc(100vw * 0.6), calc(100vh * 0.1)) scale(1.1); }
+            100% { transform: translate(calc(100vw * -0.15), calc(100vh * 0.9)) scale(1); }
+        }
+        @keyframes float7-pc {
+            0% { transform: translate(0, 0) scale(1); }
+            22% { transform: translate(calc(100vw * 0.2), calc(100vh * 0.7)) scale(1.2); }
+            42% { transform: translate(calc(100vw * 0.7), calc(100vh * 0.3)) scale(0.9); }
+            62% { transform: translate(calc(100vw * 0.4), calc(100vh * 0.9)) scale(1.3); }
+            82% { transform: translate(calc(100vw * 0.1), calc(100vh * 0.2)) scale(1); }
+            94% { transform: translate(calc(100vw * 0.8), calc(100vh * 0.5)) scale(1.1); }
+            100% { transform: translate(calc(100vw * 1.1), calc(100vh * 1.1)) scale(1); }
+        }
+        @keyframes float8-pc {
+            0% { transform: translate(0, 0) scale(1); }
+            17% { transform: translate(calc(100vw * 0.5), calc(100vh * -0.15)) scale(1.1); }
+            37% { transform: translate(calc(100vw * 0.1), calc(100vh * 0.6)) scale(0.8); }
+            57% { transform: translate(calc(100vw * 0.9), calc(100vh * 0.4)) scale(1.2); }
+            77% { transform: translate(calc(100vw * 0.3), calc(100vh * 0.1)) scale(0.9); }
+            93% { transform: translate(calc(100vw * 0.7), calc(100vh * 0.8)) scale(1.1); }
+            100% { transform: translate(calc(100vw * 1.1), calc(100vh * -0.15)) scale(1); }
+        }
+        @keyframes float9-pc {
+            0% { transform: translate(0, 0) scale(1); }
+            14% { transform: translate(calc(100vw * -0.2), calc(100vh * 0.5)) scale(1.2); }
+            34% { transform: translate(calc(100vw * 0.6), calc(100vh * 0.8)) scale(0.9); }
+            54% { transform: translate(calc(100vw * 0.2), calc(100vh * 0.1)) scale(1.3); }
+            74% { transform: translate(calc(100vw * 0.8), calc(100vh * 0.6)) scale(1); }
+            91% { transform: translate(calc(100vw * 0.3), calc(100vh * 0.3)) scale(1.1); }
+            100% { transform: translate(calc(100vw * -0.2), calc(100vh * 1.1)) scale(1); }
+        }
+        @keyframes float10-pc {
+            0% { transform: translate(0, 0) scale(1); }
+            24% { transform: translate(calc(100vw * -0.1), calc(100vh * 0.4)) scale(1.1); }
+            44% { transform: translate(calc(100vw * 0.5), calc(100vh * -0.1)) scale(0.8); }
+            64% { transform: translate(calc(100vw * 0.1), calc(100vh * 0.8)) scale(1.2); }
+            84% { transform: translate(calc(100vw * 0.7), calc(100vh * 0.2)) scale(0.9); }
+            97% { transform: translate(calc(100vw * 0.2), calc(100vh * 0.5)) scale(1.1); }
+            100% { transform: translate(calc(100vw * -0.1), calc(100vh * -0.1)) scale(1); }
         }
 
-        /* 赛博朋克卡片 */
+        /* 赛博朋克卡片（通用样式） */
         .card {
             background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(10px);
@@ -146,7 +238,7 @@
             box-shadow: 0 0 25px rgba(0, 200, 255, 0.3);
         }
 
-        /* 头像样式 */
+        /* 头像样式（通用） */
         .avatar {
             width: 100px;
             height: 100px;
@@ -161,7 +253,7 @@
             box-shadow: 0 0 15px rgba(255, 0, 200, 0.3);
         }
 
-        /* 文本样式 */
+        /* 文本样式（通用） */
         h1 {
             text-align: center;
             font-size: 1.8rem;
@@ -186,7 +278,7 @@
             color: #e0e0e0;
         }
 
-        /* 社交链接样式 */
+        /* 社交链接样式（通用） */
         .social {
             display: flex;
             justify-content: center;
@@ -232,35 +324,169 @@
         /* 禁止打印 */
         @media print { html, body { display: none !important; } }
 
-        /* 手机端效果增强：满屏动画自动适配vw/vh，无需额外调整 */
+        /* ========== 手机端10个点精细化适配 ========== */
         @media (max-width: 768px) {
+            /* 1. 霓虹点尺寸适配 */
             .cyber-dot {
-                box-shadow: 0 0 15px currentColor, 0 0 30px currentColor !important;
+                box-shadow: 0 0 12px currentColor, 0 0 25px currentColor !important;
             }
-            /* 手机端放大霓虹点 */
-            .cyber-dot:nth-child(1) { width: 30px; height: 30px; }
-            .cyber-dot:nth-child(2) { width: 25px; height: 25px; }
-            .cyber-dot:nth-child(3) { width: 35px; height: 35px; }
-            .cyber-dot:nth-child(4) { width: 28px; height: 28px; }
-            .cyber-dot:nth-child(5) { width: 32px; height: 32px; }
+            .cyber-dot:nth-child(1) { width: 25px; height: 25px; }
+            .cyber-dot:nth-child(2) { width: 20px; height: 20px; }
+            .cyber-dot:nth-child(3) { width: 30px; height: 30px; }
+            .cyber-dot:nth-child(4) { width: 23px; height: 23px; }
+            .cyber-dot:nth-child(5) { width: 27px; height: 27px; }
+            .cyber-dot:nth-child(6) { width: 24px; height: 24px; }
+            .cyber-dot:nth-child(7) { width: 26px; height: 26px; }
+            .cyber-dot:nth-child(8) { width: 22px; height: 22px; }
+            .cyber-dot:nth-child(9) { width: 28px; height: 28px; }
+            .cyber-dot:nth-child(10) { width: 21px; height: 21px; }
+
+            /* 2. 替换手机端专属非线性动画 */
+            .cyber-dot:nth-child(1) { animation: float1-mobile 15s ease-in-out infinite; }
+            .cyber-dot:nth-child(2) { animation: float2-mobile 12s ease-in-out infinite; }
+            .cyber-dot:nth-child(3) { animation: float3-mobile 14s ease-in-out infinite; }
+            .cyber-dot:nth-child(4) { animation: float4-mobile 11s ease-in-out infinite; }
+            .cyber-dot:nth-child(5) { animation: float5-mobile 13s ease-in-out infinite; }
+            .cyber-dot:nth-child(6) { animation: float6-mobile 16s ease-in-out infinite; }
+            .cyber-dot:nth-child(7) { animation: float7-mobile 10s ease-in-out infinite; }
+            .cyber-dot:nth-child(8) { animation: float8-mobile 17s ease-in-out infinite; }
+            .cyber-dot:nth-child(9) { animation: float9-mobile 9s ease-in-out infinite; }
+            .cyber-dot:nth-child(10) { animation: float10-mobile 14s ease-in-out infinite; }
+
+            /* 手机端非线性动画：幅度缩小50%，曲线轨迹更适配小屏 */
+            @keyframes float1-mobile {
+                0% { transform: translate(0, 0) scale(1); }
+                15% { transform: translate(calc(100vw * 0.15), calc(100vh * 0.25)) scale(1.1); }
+                35% { transform: translate(calc(100vw * 0.35), calc(100vh * 0.1)) scale(0.9); }
+                55% { transform: translate(calc(100vw * 0.2), calc(100vh * 0.4)) scale(1.2); }
+                75% { transform: translate(calc(100vw * 0.05), calc(100vh * 0.2)) scale(1); }
+                90% { transform: translate(calc(100vw * 0.4), calc(100vh * 0.3)) scale(1.05); }
+                100% { transform: translate(calc(100vw * 1.1), calc(100vh * 1.1)) scale(1); }
+            }
+            @keyframes float2-mobile {
+                0% { transform: translate(0, 0) scale(1); }
+                20% { transform: translate(calc(100vw * 0.3), calc(100vh * -0.05)) scale(1.05); }
+                40% { transform: translate(calc(100vw * 0.1), calc(100vh * 0.35)) scale(0.85); }
+                60% { transform: translate(calc(100vw * 0.4), calc(100vh * 0.2)) scale(1.1); }
+                80% { transform: translate(calc(100vw * 0.2), calc(100vh * 0.05)) scale(0.95); }
+                95% { transform: translate(calc(100vw * 0.45), calc(100vh * 0.4)) scale(1.05); }
+                100% { transform: translate(calc(100vw * 1.1), calc(100vh * -0.1)) scale(1); }
+            }
+            @keyframes float3-mobile {
+                0% { transform: translate(0, 0) scale(1); }
+                10% { transform: translate(calc(100vw * -0.05), calc(100vh * 0.2)) scale(1.1); }
+                30% { transform: translate(calc(100vw * 0.25), calc(100vh * 0.45)) scale(0.9); }
+                50% { transform: translate(calc(100vw * 0.1), calc(100vh * 0.05)) scale(1.2); }
+                70% { transform: translate(calc(100vw * 0.35), calc(100vh * 0.3)) scale(1); }
+                85% { transform: translate(calc(100vw * 0.15), calc(100vh * 0.15)) scale(1.05); }
+                100% { transform: translate(calc(100vw * -0.1), calc(100vh * 1.1)) scale(1); }
+            }
+            @keyframes float4-mobile {
+                0% { transform: translate(0, 0) scale(1); }
+                25% { transform: translate(calc(100vw * -0.025), calc(100vh * 0.15)) scale(1.05); }
+                45% { transform: translate(calc(100vw * 0.2), calc(100vh * -0.025)) scale(0.85); }
+                65% { transform: translate(calc(100vw * 0.05), calc(100vh * 0.35)) scale(1.1); }
+                85% { transform: translate(calc(100vw * 0.3), calc(100vh * 0.1)) scale(0.95); }
+                98% { transform: translate(calc(100vw * 0.1), calc(100vh * 0.25)) scale(1.05); }
+                100% { transform: translate(calc(100vw * -0.05), calc(100vh * -0.05)) scale(1); }
+            }
+            @keyframes float5-mobile {
+                0% { transform: translate(0, 0) scale(1); }
+                18% { transform: translate(calc(100vw * 0.25), calc(100vh * 0.05)) scale(1.1); }
+                38% { transform: translate(calc(100vw * 0.4), calc(100vh * 0.35)) scale(0.9); }
+                58% { transform: translate(calc(100vw * 0.15), calc(100vh * 0.2)) scale(1.2); }
+                78% { transform: translate(calc(100vw * 0.45), calc(100vh * 0.1)) scale(1); }
+                92% { transform: translate(calc(100vw * 0.3), calc(100vh * 0.4)) scale(1.05); }
+                100% { transform: translate(calc(100vw * 1.1), calc(100vh * 0.15)) scale(1); }
+            }
+            @keyframes float6-mobile {
+                0% { transform: translate(0, 0) scale(1); }
+                12% { transform: translate(calc(100vw * -0.075), calc(100vh * 0.3)) scale(1.1); }
+                32% { transform: translate(calc(100vw * 0.2), calc(100vh * 0.1)) scale(0.9); }
+                52% { transform: translate(calc(100vw * 0.4), calc(100vh * 0.4)) scale(1.2); }
+                72% { transform: translate(calc(100vw * 0.1), calc(100vh * 0.25)) scale(1); }
+                88% { transform: translate(calc(100vw * 0.3), calc(100vh * 0.05)) scale(1.05); }
+                100% { transform: translate(calc(100vw * -0.075), calc(100vh * 0.45)) scale(1); }
+            }
+            @keyframes float7-mobile {
+                0% { transform: translate(0, 0) scale(1); }
+                22% { transform: translate(calc(100vw * 0.1), calc(100vh * 0.35)) scale(1.1); }
+                42% { transform: translate(calc(100vw * 0.35), calc(100vh * 0.15)) scale(0.9); }
+                62% { transform: translate(calc(100vw * 0.2), calc(100vh * 0.45)) scale(1.2); }
+                82% { transform: translate(calc(100vw * 0.05), calc(100vh * 0.1)) scale(1); }
+                94% { transform: translate(calc(100vw * 0.4), calc(100vh * 0.25)) scale(1.05); }
+                100% { transform: translate(calc(100vw * 1.1), calc(100vh * 1.1)) scale(1); }
+            }
+            @keyframes float8-mobile {
+                0% { transform: translate(0, 0) scale(1); }
+                17% { transform: translate(calc(100vw * 0.25), calc(100vh * -0.075)) scale(1.05); }
+                37% { transform: translate(calc(100vw * 0.05), calc(100vh * 0.3)) scale(0.85); }
+                57% { transform: translate(calc(100vw * 0.45), calc(100vh * 0.2)) scale(1.1); }
+                77% { transform: translate(calc(100vw * 0.15), calc(100vh * 0.05)) scale(0.95); }
+                93% { transform: translate(calc(100vw * 0.35), calc(100vh * 0.4)) scale(1.05); }
+                100% { transform: translate(calc(100vw * 1.1), calc(100vh * -0.075)) scale(1); }
+            }
+            @keyframes float9-mobile {
+                0% { transform: translate(0, 0) scale(1); }
+                14% { transform: translate(calc(100vw * -0.1), calc(100vh * 0.25)) scale(1.1); }
+                34% { transform: translate(calc(100vw * 0.3), calc(100vh * 0.4)) scale(0.9); }
+                54% { transform: translate(calc(100vw * 0.1), calc(100vh * 0.05)) scale(1.2); }
+                74% { transform: translate(calc(100vw * 0.4), calc(100vh * 0.3)) scale(1); }
+                91% { transform: translate(calc(100vw * 0.15), calc(100vh * 0.15)) scale(1.05); }
+                100% { transform: translate(calc(100vw * -0.1), calc(100vh * 1.1)) scale(1); }
+            }
+            @keyframes float10-mobile {
+                0% { transform: translate(0, 0) scale(1); }
+                24% { transform: translate(calc(100vw * -0.05), calc(100vh * 0.2)) scale(1.05); }
+                44% { transform: translate(calc(100vw * 0.25), calc(100vh * -0.05)) scale(0.85); }
+                64% { transform: translate(calc(100vw * 0.05), calc(100vh * 0.4)) scale(1.1); }
+                84% { transform: translate(calc(100vw * 0.35), calc(100vh * 0.1)) scale(0.95); }
+                97% { transform: translate(calc(100vw * 0.1), calc(100vh * 0.25)) scale(1.05); }
+                100% { transform: translate(calc(100vw * -0.05), calc(100vh * -0.05)) scale(1); }
+            }
+
+            /* 3. 背景和卡片适配 */
             body { 
-                background-size: cover, 30px 30px, 30px 30px !important;
+                background-size: cover, 25px 25px, 25px 25px !important;
+            }
+            .card {
+                padding: 1.5rem 1rem !important;
             }
         }
 
-        /* 小屏手机适配 */
+        /* ========== 小屏手机（375px以下）极致适配 ========== */
         @media (max-width: 375px) {
+            /* 头像尺寸缩小 */
             .avatar { width: 80px; height: 80px; }
+            /* 文字尺寸缩小 */
             h1 { font-size: 1.6rem; }
+            .title, .bio { font-size: 0.9rem; }
+            /* 社交链接尺寸缩小 */
             .social-link { width: 36px; height: 36px; }
             .custom-icon { width: 26px; height: 26px; }
+            /* 霓虹点尺寸再微调 */
+            .cyber-dot:nth-child(1) { width: 22px; height: 22px; }
+            .cyber-dot:nth-child(2) { width: 18px; height: 18px; }
+            .cyber-dot:nth-child(3) { width: 27px; height: 27px; }
+            .cyber-dot:nth-child(4) { width: 20px; height: 20px; }
+            .cyber-dot:nth-child(5) { width: 24px; height: 24px; }
+            .cyber-dot:nth-child(6) { width: 21px; height: 21px; }
+            .cyber-dot:nth-child(7) { width: 23px; height: 23px; }
+            .cyber-dot:nth-child(8) { width: 19px; height: 19px; }
+            .cyber-dot:nth-child(9) { width: 25px; height: 25px; }
+            .cyber-dot:nth-child(10) { width: 18px; height: 18px; }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- 5个赛博朋克动态霓虹点 -->
+    <!-- 10个赛博朋克非线性无规则霓虹点 -->
+    <div class="cyber-dot"></div>
+    <div class="cyber-dot"></div>
+    <div class="cyber-dot"></div>
+    <div class="cyber-dot"></div>
+    <div class="cyber-dot"></div>
     <div class="cyber-dot"></div>
     <div class="cyber-dot"></div>
     <div class="cyber-dot"></div>
@@ -271,7 +497,7 @@
     <div class="card">
         <img src="myavatar.jpg" alt="头像" class="avatar" />
         <h1>张杰</h1>
-        <div class="title">签名还没想好</div>
+        <div class="title">大厂转了一圈的HR</div>
         <p class="bio">擅长增肌减脂，没事的时候也当当HR</p>
         <div class="social">
             <a href="https://www.linkedin.com/" class="social-link">
